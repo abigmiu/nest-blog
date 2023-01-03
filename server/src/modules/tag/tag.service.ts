@@ -31,19 +31,35 @@ export class TagService {
         await this.tagRepository.save(tag);
     }
 
-    findAll() {
-        return 'his action returns all tag';
+    /** 根据 id 查找 */
+    async findOneById(id: number) {
+        const repoRes = await this.tagRepository.findOne({
+            where: {
+                isDel: false,
+                id: id,
+            },
+        });
+
+        if (!repoRes) {
+            throw new BadRequestException('该标签不存在');
+        }
+
+        return repoRes;
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} tag`;
+    /** 更新 */
+    async update(id: number, updateTagDto: UpdateTagDto) {
+        const repoRes = await this.findOneById(id);
+        if (updateTagDto.name) {
+            repoRes.name = updateTagDto.name;
+        }
+        await this.tagRepository.save(repoRes);
     }
 
-    update(id: number, updateTagDto: UpdateTagDto) {
-        return `This action updates a #${id} tag`;
-    }
-
-    remove(id: number) {
-        return `This action removes a #${id} tag`;
+    /** 删除 */
+    async remove(id: number) {
+        const repoRes = await this.findOneById(id);
+        repoRes.isDel = true;
+        await this.tagRepository.save(repoRes);
     }
 }
