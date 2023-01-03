@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app/app.module';
 
 import * as chalk from 'chalk';
+import { ValidationPipe } from './pipe/validate.pipe';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -15,6 +16,8 @@ async function bootstrap() {
     app.enableCors({
         credentials: true,
     });
+
+    app.useGlobalPipes(new ValidationPipe());
 
     const globalPrefix = config.get<string>('globalPrefix');
     app.setGlobalPrefix(globalPrefix);

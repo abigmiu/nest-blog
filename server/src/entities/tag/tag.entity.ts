@@ -3,6 +3,9 @@ import { SharedEntity } from '../base';
 
 @Entity('tag')
 export class TagEntity extends SharedEntity {
-    @Column()
+    @Column({
+        comment: '名字',
+        nullable: false,
+    })
     name: string;
 }

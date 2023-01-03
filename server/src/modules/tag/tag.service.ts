@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TagEntity } from 'src/entities/tag/tag.entity';
 import { Repository } from 'typeorm';
@@ -12,8 +12,23 @@ export class TagService {
         private tagRepository: Repository<TagEntity>,
     ) {}
 
-    create(createTagDto: CreateTagDto) {
-        return 'This action adds a new tag';
+    /** 创建标签 */
+    async create(createTagDto: CreateTagDto) {
+        const { name } = createTagDto;
+
+        const repoRes = await this.tagRepository.findOne({
+            where: {
+                name,
+            },
+        });
+
+        if (repoRes) {
+            throw new BadRequestException('已有相同的标签名');
+        }
+
+        const tag = new TagEntity();
+        tag.name = name;
+        await this.tagRepository.save(tag);
     }
 
     findAll() {
