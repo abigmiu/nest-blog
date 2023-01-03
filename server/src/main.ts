@@ -5,6 +5,7 @@ import { AppModule } from './app/app.module';
 
 import * as chalk from 'chalk';
 import { ValidationPipe } from './pipe/validate.pipe';
+import { TransformInterceptor } from './interceptor/transform.interceptor';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -18,6 +19,7 @@ async function bootstrap() {
     });
 
     app.useGlobalPipes(new ValidationPipe());
+    app.useGlobalInterceptors(new TransformInterceptor());
 
     const globalPrefix = config.get<string>('globalPrefix');
     app.setGlobalPrefix(globalPrefix);
