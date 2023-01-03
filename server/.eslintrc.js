@@ -23,6 +23,12 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 'off',
         'semi': ['error', 'always'],
         // "indent": ["error", 4],
-        "quotes": ['error', 'single']
+        "quotes": ['error', 'single'],
+        '@typescript-eslint/no-unused-vars': ['error', {
+            vars: 'all',
+            args: 'none',
+            ignoreRestSiblings: true,
+        }],
+
     },
 };
