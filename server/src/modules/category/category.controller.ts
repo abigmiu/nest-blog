@@ -6,20 +6,20 @@ import { IdParam } from 'src/dto/param.dto';
 
 @Controller('category')
 export class CategoryController {
-    constructor(private readonly tagService: CategoryService) {}
+    constructor(private readonly categoryService: CategoryService) {}
 
     @Post()
     create(@Body() createTagDto: CreateCategoryDto) {
-        return this.tagService.create(createTagDto);
+        return this.categoryService.create(createTagDto);
     }
 
     @Put(':id')
     update(@Param() param: IdParam, @Body() updateTagDto: UpdateCategoryDto) {
-        return this.tagService.update(param.id, updateTagDto);
+        return this.categoryService.update(param.id, updateTagDto);
     }
 
     @Delete(':id')
     remove(@Param() param: IdParam) {
-        return this.tagService.remove(param.id);
+        return this.categoryService.remove(param.id);
     }
 }
