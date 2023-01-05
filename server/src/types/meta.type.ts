@@ -3,4 +3,4 @@ export interface IMetaTypes {
     tag: string;
 }
 
-export type IMetaTypeKey = keyof IMetaTypes;
+export type IMetaTypeValue = IMetaTypes[keyof IMetaTypes];

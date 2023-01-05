@@ -1,5 +1,5 @@
 import { IsOptional } from 'class-validator';
-import { IMetaTypeKey } from 'src/types/meta.type';
+import { IMetaTypeValue } from 'src/types/meta.type';
 import { Column, Entity } from 'typeorm';
 import { SharedEntity } from '../base';
 
@@ -23,7 +23,7 @@ export class MetaEntity extends SharedEntity {
         length: 32,
         comment: '项目类型',
     })
-    type: IMetaTypeKey;
+    type: IMetaTypeValue;
 
     @Column({
         length: 200,

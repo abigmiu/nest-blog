@@ -64,5 +64,5 @@ export class ContentEntity extends SharedEntity {
 
     @ManyToMany(() => MetaEntity)
     @JoinTable()
-    mates: MetaEntity[];
+    metas: MetaEntity[];
 }

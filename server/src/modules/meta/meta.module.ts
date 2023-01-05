@@ -8,5 +8,6 @@ import { MetaEntity } from 'src/entities/metas/meta.entity';
     imports: [TypeOrmModule.forFeature([MetaEntity])],
     controllers: [MetaController],
     providers: [MetaService],
+    exports: [MetaService],
 })
 export class MetaModule {}

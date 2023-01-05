@@ -1,4 +1,5 @@
-import { IsBoolean, IsInt, IsOptional, IsString, Length, Min } from 'class-validator';
+import { IsArray, IsBoolean, IsInt, IsOptional, IsString, Length, Min } from 'class-validator';
+import { MetaEntity } from 'src/entities/metas/meta.entity';
 
 export class CreateContentDto {
     @Length(1, 200, {
@@ -36,4 +37,10 @@ export class CreateContentDto {
     @IsBoolean()
     @IsOptional()
     allowComment?: boolean;
+
+    @IsArray()
+    categories: MetaEntity[];
+
+    @IsArray()
+    tags: string[];
 }

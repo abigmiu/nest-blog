@@ -1,6 +1,6 @@
 import { IsInt, IsOptional, IsString, Length } from 'class-validator';
 import { metaTypes } from 'src/constant/meta';
-import { IMetaTypeKey } from 'src/types/meta.type';
+import { IMetaTypeValue } from 'src/types/meta.type';
 
 const metaTypeValue = Object.values(metaTypes);
 
@@ -23,7 +23,7 @@ export class CreateMetaDto {
             }
         },
     })
-    type: IMetaTypeKey;
+    type: IMetaTypeValue;
 
     @Length(1, 200, {
         message: 'description 字段的长度是 1 到 200字',
