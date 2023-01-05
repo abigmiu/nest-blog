@@ -1,5 +1,6 @@
 import { Entity, Column, ManyToMany, JoinTable } from 'typeorm';
 import { SharedEntity } from '../base';
+import { FieldEntity } from '../filed/field.entity';
 import { MetaEntity } from '../metas/meta.entity';
 
 @Entity('content')
@@ -65,4 +66,8 @@ export class ContentEntity extends SharedEntity {
     @ManyToMany(() => MetaEntity)
     @JoinTable()
     metas: MetaEntity[];
+
+    @ManyToMany(() => FieldEntity)
+    @JoinTable()
+    fields: FieldEntity;
 }
