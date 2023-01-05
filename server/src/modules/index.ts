@@ -1,5 +1,4 @@
-import { CategoryModule } from './category/category.module';
-import { TagModule } from './tag/tag.module';
+import { MetaModule } from './meta/meta.module';
 
-const modules = [TagModule, CategoryModule];
+const modules = [MetaModule];
 export default modules;

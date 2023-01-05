@@ -1,7 +1,8 @@
+import { IMetaTypeKey } from 'src/types/meta.type';
 import { Column, Entity } from 'typeorm';
 import { SharedEntity } from '../base';
 
-@Entity()
+@Entity('meta')
 export class MetaEntity extends SharedEntity {
     @Column({
         length: 200,
@@ -12,6 +13,7 @@ export class MetaEntity extends SharedEntity {
     @Column({
         length: 200,
         comment: '项目缩略名',
+        nullable: true,
     })
     slug: string;
 
@@ -19,21 +21,30 @@ export class MetaEntity extends SharedEntity {
         length: 32,
         comment: '项目类型',
     })
-    type: string;
+    type: IMetaTypeKey;
 
     @Column({
         length: 200,
         comment: '选项描述',
+        default: null,
     })
     description: string;
 
     @Column({
         comment: '所属',
+        default: 0,
     })
     count: number;
 
     @Column({
         comment: '项目排序',
+        default: 0,
     })
     order: number;
+
+    @Column({
+        comment: '父级分类',
+        default: 0,
+    })
+    parent: number;
 }
