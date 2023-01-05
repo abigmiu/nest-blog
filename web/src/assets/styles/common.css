@@ -1,0 +1,19 @@
+.between-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 阴影 */
+.shadow-box-mini {
+    box-shadow: 1px 1px 3px var(--mask);
+}
+
+.shadow-box {
+    box-shadow: 0 1px 20px -6px var(--borderColor);
+    transition: all 0.3s ease;
+}
+
+.shadow-box:hover {
+    box-shadow: 0 5px 10px 5px var(--borderHoverColor);
+}

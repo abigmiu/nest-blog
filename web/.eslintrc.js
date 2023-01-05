@@ -29,6 +29,14 @@ module.exports = {
             args: 'none',
             ignoreRestSiblings: true,
         }],
-
+        "vue/html-indent": ['error', 4]
     },
+    "overrides": [
+        {
+            files: ['src/pages/index.vue', 'src/pages/**/index.vue'],   // 匹配views和二级目录中的index.vue
+            rules: {
+                'vue/multi-word-component-names': "off",
+            }
+        },
+    ]
 };
