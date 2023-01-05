@@ -7,8 +7,7 @@ export class MetaController {
     constructor(private readonly metaService: MetaService) {}
 
     @Post()
-    create(@Body() dto: CreateMetaDto) {
-        console.log('create meta');
-        console.log(dto);
+    private create(@Body() dto: CreateMetaDto) {
+        return this.metaService.create(dto);
     }
 }

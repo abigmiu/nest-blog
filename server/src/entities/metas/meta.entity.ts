@@ -1,3 +1,4 @@
+import { IsOptional } from 'class-validator';
 import { IMetaTypeKey } from 'src/types/meta.type';
 import { Column, Entity } from 'typeorm';
 import { SharedEntity } from '../base';
@@ -15,7 +16,8 @@ export class MetaEntity extends SharedEntity {
         comment: '项目缩略名',
         nullable: true,
     })
-    slug: string;
+    @IsOptional()
+    slug?: string;
 
     @Column({
         length: 32,
