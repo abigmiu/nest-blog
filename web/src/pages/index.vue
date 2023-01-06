@@ -1,4 +1,4 @@
 <template>
-    123
     <IndexHomeBg />
+    <IndexHomeIntro />
 </template>

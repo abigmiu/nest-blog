@@ -17,5 +17,8 @@
     "nuxt": "3.0.0",
     "sass": "^1.57.1",
     "vite-svg-loader": "^4.0.0"
+  },
+  "dependencies": {
+    "@icon-park/vue-next": "^1.4.2"
   }
 }
