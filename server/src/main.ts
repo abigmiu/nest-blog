@@ -3,6 +3,8 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app/app.module';
 
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
 import * as chalk from 'chalk';
 import { ValidationPipe } from './pipe/validate.pipe';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
@@ -29,10 +31,15 @@ async function bootstrap() {
     const globalPrefix = config.get<string>('globalPrefix');
     app.setGlobalPrefix(globalPrefix);
 
+    const swaggerConfig = new DocumentBuilder().build();
+    const document = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup(`${globalPrefix}-doc`, app, document);
+
     const port = config.get<number>('port');
     await app.listen(port, 'localhost', async () => {
         const url = await app.getUrl();
-        console.log(`server listen in ${chalk.yellow(`${url}${globalPrefix}`)}`);
+        console.log(`server listen in ${chalk.yellowBright(`${url}${globalPrefix}`)}`);
+        console.log(`swagger running in ${chalk.blueBright(`${url}${globalPrefix}-doc`)}`);
     });
 }
 bootstrap();
