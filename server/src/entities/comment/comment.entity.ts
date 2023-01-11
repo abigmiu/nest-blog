@@ -53,8 +53,6 @@ export class CommentEntity extends SharedEntity {
     })
     status: number;
 
-    @Column({
-        nullable: true,
-    })
+    @ManyToOne(() => CommentEntity)
     parent: CommentEntity;
 }

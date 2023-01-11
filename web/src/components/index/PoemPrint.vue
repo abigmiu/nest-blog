@@ -18,8 +18,8 @@ let poem = '人生得意须尽欢，莫使金樽空对月。';
 
 const content = ref(poem);
 
-let printTimer: number;
-let delayTimer: number;
+let printTimer: number | null;
+let delayTimer: number | null;
 let printDesc = true; // 删除字
 let currentLength = poem.length;
 
@@ -42,17 +42,23 @@ const print = () => {
     }, printTimeout);
 };
 /** 延迟开始 */
-const delayToPrint = () => {
-    clearInterval(printTimer);
-    delayTimer = window.setTimeout(() => {
+const delayToPrint = (immediately = false) => {
+    clearAllTimer();
+    if (immediately) {
         print();
-    }, delayTimeout);
+    } else {
+        delayTimer = window.setTimeout(() => {
+            print();
+        }, delayTimeout);
+    }
 };
 
 /** 清除所有定时器 */
 const clearAllTimer = () => {
-    clearTimeout(delayTimer);
-    clearInterval(printTimer);
+    clearTimeout(delayTimer!);
+    clearInterval(printTimer!);
+    delayTimer = null;
+    printTimer = null;
 };
 
 onMounted(() => delayToPrint());
@@ -67,7 +73,7 @@ const fetchData = () => {
             poem = res.content;
             currentLength = 0;
             printDesc = false;
-            delayToPrint();
+            delayToPrint(true);
         }).catch(() => {
             content.value = '加载失败，请重试！';
         });
