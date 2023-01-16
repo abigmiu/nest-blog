@@ -5,12 +5,15 @@ import Announcement from '../pages/website/announcement/Announcement'
 const routers = createBrowserRouter([
     {
         path: '/',
-        element: <App />
+        element: <App />,
+        children: [
+            {
+                path: 'announcement',
+                element: <Announcement/>
+            }
+        ]
     },
-    {
-        path: '/announcement',
-        element: <Announcement/>
-    }
+    
 ])
 
 export default routers;

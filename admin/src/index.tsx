@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import 'antd/dist/reset.css';
-import './assets/styles/common.css'
+import './assets/styles/common.css';
+import './assets/styles/index.css';
 import './virtual:windi.css'
 import { RouterProvider } from 'react-router-dom'
 import routers from './routers/route';
