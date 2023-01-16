@@ -1,9 +1,9 @@
-import { Entity, Column } from 'typeorm';
-import { SharedEntity } from '../base';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
-@Entity('option')
-export class OptionEntity extends SharedEntity {
-    @Column({
+/** 网站选项 */
+@Entity('bb-options')
+export class OptionEntity {
+    @PrimaryColumn({
         comment: '字段',
     })
     key: string;

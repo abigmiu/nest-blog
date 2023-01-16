@@ -1,9 +1,7 @@
-import { Entity, Column, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column } from 'typeorm';
 import { SharedEntity } from '../base';
-import { FieldEntity } from '../filed/field.entity';
-import { MetaEntity } from '../metas/meta.entity';
 
-@Entity('content')
+@Entity('bb-contents')
 export class ContentEntity extends SharedEntity {
     @Column({
         length: 200,
@@ -62,12 +60,4 @@ export class ContentEntity extends SharedEntity {
         default: true,
     })
     allowComment: boolean;
-
-    @ManyToMany(() => MetaEntity)
-    @JoinTable()
-    metas: MetaEntity[];
-
-    @ManyToMany(() => FieldEntity)
-    @JoinTable()
-    fields: FieldEntity;
 }

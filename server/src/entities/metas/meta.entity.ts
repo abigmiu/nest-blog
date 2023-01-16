@@ -1,11 +1,17 @@
 import { IsOptional } from 'class-validator';
 import { IMetaTypeValue } from 'src/types/meta.type';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
 import { SharedEntity } from '../base';
+import { ContentEntity } from '../content/content.entity';
 
-@Entity('meta')
+/** 分类或者标签之类的 */
+@Entity('bb-metas')
 export class MetaEntity extends SharedEntity {
-    @Column({
+    @ManyToMany(() => ContentEntity)
+    @JoinTable()
+    contents: ContentEntity[];
+
+    @PrimaryColumn({
         length: 200,
         comment: '名称',
     })

@@ -30,7 +30,6 @@ export class ContentService {
         content.status = data.status;
         content.password = data.password;
         content.type = data.type;
-        content.metas = metas;
 
         await this.contentRepo.save(content);
     }

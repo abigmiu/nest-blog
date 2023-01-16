@@ -2,10 +2,13 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 import { SharedEntity } from '../base';
 import { ContentEntity } from '../content/content.entity';
 
-@Entity('comment')
+@Entity('bb-comment')
 export class CommentEntity extends SharedEntity {
     @ManyToOne(() => ContentEntity)
     content: ContentEntity;
+
+    @ManyToOne(() => CommentEntity)
+    parent: CommentEntity;
 
     @Column({
         length: 200,
@@ -52,7 +55,4 @@ export class CommentEntity extends SharedEntity {
         default: 0,
     })
     status: number;
-
-    @ManyToOne(() => CommentEntity)
-    parent: CommentEntity;
 }

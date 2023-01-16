@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { announcementKeys, webInfoKeys } from 'src/constant/option';
 import { WebAnnouncementResponse, WebInfoResponse } from 'src/dto/option/option-response.dto';
@@ -32,5 +32,11 @@ export class OptionController {
     async getAnnouncement() {
         const res = await this.optionService.getOption(announcementKeys);
         return new WebAnnouncementResponse(res);
+    }
+
+    @ApiOperation({ summary: '更改网站公告' })
+    @Post('announcement')
+    async updateAnnouncement(@Body() data: string[]) {
+        return this.optionService.createOrUpdateAnnouncement(data);
     }
 }
