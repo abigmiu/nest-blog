@@ -36,6 +36,7 @@ export default function AnnouncementInput(props: IProps) {
                 className="mx-2"
                 onChange={onInputChange}
                 ref={inputRef}
+                defaultValue={props.propState.value}
             ></Input.TextArea>
             <Button
                 icon={<PlusOutlined />}
