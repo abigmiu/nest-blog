@@ -25,32 +25,26 @@ const columns: ColumnsType<IMetaListResponseItem> = [
     {
         title: '名称',
         dataIndex: 'name',
-        key: 'name',
     },
     {
         title: '缩写',
         dataIndex: 'slug',
-        key: 'slug',
     },
     {
         title: '描述',
         dataIndex: 'description',
-        key: 'description',
     },
     {
         title: '统计',
         dataIndex: 'count',
-        key: 'count',
     },
     {
         title: '排序',
         dataIndex: 'order',
-        key: 'order',
     },
     {
         title: '父级分类',
         dataIndex: 'parentName',
-        key: 'parentName',
     }
 ]
 
@@ -118,7 +112,7 @@ export default function ContentCategory() {
             </Card>
 
             <Card className="mt-5">
-                <Table columns={columns} dataSource={list} pagination={false}></Table>
+                <Table columns={columns} dataSource={list} pagination={false} rowKey='id'></Table>
             </Card>
         </>
     )

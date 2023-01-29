@@ -8,9 +8,10 @@ const metaTypeValue = Object.values(metaTypes);
 export class QueryMetaDto {
     @ApiProperty({ description: '类型' })
     @IsString({
-        message: (arg) => {
-            console.log(arg);
-            if (!metaTypeValue.includes(arg.value)) {
+        message: ({ value }) => {
+            console.log(value);
+            console.log(metaTypeValue);
+            if (!metaTypeValue.includes(value.type)) {
                 return 'type 字段不合法';
             }
         },

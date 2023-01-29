@@ -9,12 +9,22 @@ const routers = createBrowserRouter([
         element: <App />,
         children: [
             {
-                path: 'announcement',
-                element: <Announcement/>
+                path: 'website',
+                children: [
+                    {
+                        path: 'announcement',
+                        element: <Announcement/>
+                    }
+                ]
             },
             {
-                path: 'content/category',
-                element: <ContentCategory></ContentCategory>
+                path: 'content',
+                children: [
+                    {
+                        path: 'category',
+                        element: <ContentCategory />
+                    }
+                ]
             }
         ]
     },

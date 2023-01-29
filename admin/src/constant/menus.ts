@@ -7,7 +7,7 @@ export const layoutMenus: MenuProps['items'] = [
         children: [
             {
                 label: '公告',
-                key: 'website.announcement',
+                key: '/website/announcement',
             }
         ]
     },
@@ -17,14 +17,8 @@ export const layoutMenus: MenuProps['items'] = [
         children: [
             {
                 label: '分类和标签',
-                key: 'content.category',
+                key: '/content/category',
             }
         ]
     }
 ]
-
-/** 菜单的 key 对应的路由 path */
-export const menuKeyToPathMap: Record<string, string> = {
-    'website.announcement': '/announcement',
-    'content.category': '/content/category'
-}
