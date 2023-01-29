@@ -51,8 +51,8 @@ export class MetaEntity extends SharedEntity {
     order: number;
 
     @Column({
-        comment: '父级分类',
+        comment: '父级分类ID',
         default: 0,
     })
-    parent: number;
+    parentId: number;
 }

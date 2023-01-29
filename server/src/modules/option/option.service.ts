@@ -36,12 +36,12 @@ export class OptionService {
     async updateWebInfo(data: AdminSetWebInfoDto) {
         const stack = [];
         Object.keys(data).forEach(async (keyName) => {
-            const optionObj = await this.optionRepo.findOne({
-                where: {
-                    key: keyName,
-                },
-            });
-            console.log(optionObj);
+            // const optionObj = await this.optionRepo.findOne({
+            //     where: {
+            //         key: keyName,
+            //     },
+            // });
+            const optionObj = new OptionEntity();
             if (optionObj) {
                 optionObj.key = keyName;
                 optionObj.value = data[keyName];

@@ -10,10 +10,21 @@ export const layoutMenus: MenuProps['items'] = [
                 key: 'website.announcement',
             }
         ]
+    },
+    {
+        label: '内容',
+        key: 'content',
+        children: [
+            {
+                label: '分类和标签',
+                key: 'content.category',
+            }
+        ]
     }
 ]
 
 /** 菜单的 key 对应的路由 path */
 export const menuKeyToPathMap: Record<string, string> = {
     'website.announcement': '/announcement',
+    'content.category': '/content/category'
 }

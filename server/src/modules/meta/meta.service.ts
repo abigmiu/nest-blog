@@ -15,10 +15,10 @@ export class MetaService {
 
     /** 创建 */
     async create(dto: CreateMetaDto) {
-        if (dto.parent) {
+        if (dto.parentId) {
             const parent = await this.metaRepo.findOne({
                 where: {
-                    id: dto.parent,
+                    id: dto.parentId,
                 },
             });
             if (!parent) {
@@ -38,12 +38,11 @@ export class MetaService {
         if (sameNameData) {
             throw new BadRequestException('该 type 存在相同的 name');
         }
-
         const meta = new MetaEntity();
         meta.name = dto.name;
         meta.type = dto.type;
-        meta.slug = dto.slug;
-        meta.parent = dto.parent;
+        meta.slug = dto.slug || dto.name;
+        meta.parentId = dto.parentId;
         meta.order = dto.order;
 
         await this.metaRepo.save(meta);
