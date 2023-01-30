@@ -12,3 +12,12 @@ export type IMetaListResponseItem = {
     parentId: number;
     parentName?: string;
 }
+
+/** 创建 meta 请求 */
+export interface ICreateMetaRequest {
+    name: string;
+    slug?: string;
+    type: string;
+    description?: string;
+    order?: number;
+}

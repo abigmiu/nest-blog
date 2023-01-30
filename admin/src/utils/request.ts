@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { IResponse } from '../types/http';
 
@@ -14,8 +15,18 @@ instance.interceptors.request.use((config) => {
     return config;
 })
 instance.interceptors.response.use((response: AxiosResponse<IResponse<any>>) => {
+    if (response.data.code !== 200) {
+        handleBusinessError(response.data);
+        return Promise.reject();
+    }
     return response.data.data;
 })
+
+const handleBusinessError = (response: IResponse<any>) => {
+    if (response.msg) {
+        message.error(response.msg);
+    }
+}
 
 /** 请求 */
 export function request<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
