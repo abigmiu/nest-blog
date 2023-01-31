@@ -18,6 +18,10 @@ export const layoutMenus: MenuProps['items'] = [
             {
                 label: '分类和标签',
                 key: '/content/category',
+            },
+            {
+                label: '文章',
+                key: '/content/article'
             }
         ]
     }
