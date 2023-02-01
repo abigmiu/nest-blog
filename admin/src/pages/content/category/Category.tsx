@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 import { metaService } from "../../../services/meta";
 import { metaTagsOptions } from "../../../constant/meta";
 import { BasicSearch } from "../../../components/basic/BasicSearch";
-import { searchConfig } from "./config";
+import { searchConfig, listConfig } from "./config";
+import { BasicTable } from "../../../components/basic/BasicTable";
 
 
 let initSearch = {
@@ -18,30 +19,7 @@ let initSearch = {
 
 export default function ContentCategory() {
     const columns: ColumnsType<IMetaListResponseItem> = [
-        {
-            title: '名称',
-            dataIndex: 'name',
-        },
-        {
-            title: '缩写',
-            dataIndex: 'slug',
-        },
-        {
-            title: '描述',
-            dataIndex: 'description',
-        },
-        {
-            title: '统计',
-            dataIndex: 'count',
-        },
-        {
-            title: '排序',
-            dataIndex: 'order',
-        },
-        {
-            title: '父级分类',
-            dataIndex: 'parentName',
-        },
+        ...listConfig,
         {
             title: '操作',
             dataIndex: 'operate',
@@ -52,12 +30,12 @@ export default function ContentCategory() {
                         <Popconfirm title="提示" description="删除后所有数据将置为默认" onConfirm={() => onDelBtn(record.id)}>
                             <Button danger>删除</Button>
                         </Popconfirm>
-
                     </>
                 )
             }
         }
     ]
+
 
     const [list, setList] = useState<IMetaListResponseItem[]>([])
     const [searchForm] = Form.useForm()
@@ -144,12 +122,12 @@ export default function ContentCategory() {
                 onSearch={onFinish}
             ></BasicSearch>
             {/* 列表 */}
-            <Card className="mt-5">
-                <div className="mb-5 text-right">
-                    <Button type="primary" onClick={openModal}>新增</Button>
-                </div>
-                <Table columns={columns} dataSource={list} pagination={false} rowKey='id'></Table>
-            </Card>
+            <BasicTable
+                columns={columns}
+                onCreate={openModal}
+                dataSource={list}
+                pagination={false}
+            ></BasicTable>
             {/* 新增\编辑弹窗 */}
             <Modal
                 open={isModalOpen}
