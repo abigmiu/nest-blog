@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App';
 import { ArticlePage } from '../pages/content/article/Article';
+import { ArticleEdit } from '../pages/content/article/ArticleEdit';
 import ContentCategory from '../pages/content/category/Category';
 import Announcement from '../pages/website/announcement/Announcement'
 
@@ -28,6 +29,10 @@ const routers = createBrowserRouter([
                     {
                         path: 'article',
                         element: <ArticlePage/>
+                    },
+                    {
+                        path: 'article/edit',
+                        element: <ArticleEdit />
                     }
                 ]
             }

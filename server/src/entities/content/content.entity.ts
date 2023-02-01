@@ -52,6 +52,7 @@ export class ContentEntity extends SharedEntity {
 
     @Column({
         comment: '评论数',
+        default: 0,
     })
     commentsNum: number;
 

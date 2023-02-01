@@ -14,3 +14,9 @@ export interface IBasicSearchListItem extends IBasicFormItem {
 
 }
 export type IBasicSearchList = Array<IBasicSearchListItem>
+
+/** 表单组件 list */
+export interface IBasicFormEditListItem extends IBasicFormItem {
+
+}
+export type IBasicFormEditList = Array<IBasicFormEditListItem>
