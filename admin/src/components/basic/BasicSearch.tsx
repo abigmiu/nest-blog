@@ -2,10 +2,9 @@
  * 搜索查询组件
  */
 
-import { Card, Form, Row, Col, Button } from "antd";
+import { Card, Form, Row, Col, Button, Input } from "antd";
 import type { ColProps, FormProps } from 'antd';
 import type { IBasicSearchList } from "../../types/basic";
-import { getComponent } from "../../utils/component";
 
 interface IProps {
     /** 卡片标题 */
@@ -45,7 +44,8 @@ export const BasicSearch: React.FC<IProps> = (props) => {
                             return (
                                 <Col span={8} key={item.name}>
                                     <Form.Item label={item.label} name={item.name}>
-                                        {getComponent(item)}
+                                        {item.render}
+                                        {/* <Input /> */}
                                     </Form.Item>
                                 </Col>
                             )
@@ -67,10 +67,12 @@ export const BasicSearch: React.FC<IProps> = (props) => {
 
 // props 处理
 const defaultLabelCol: ColProps = {
-    span: 8,
+    style: {
+        width: 100,
+    }
 }
 const defaultWrapperCol: ColProps = {
-    span: 16,
+    // span: 18,
 }
 BasicSearch.defaultProps = {
     labelCol: defaultLabelCol,

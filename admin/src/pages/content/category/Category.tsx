@@ -6,22 +6,14 @@ import { request } from "../../../utils/request";
 import { IMetaListResponseItem } from "../../../types/meta";
 import { useEffect, useState } from "react";
 import { metaService } from "../../../services/meta";
+import { metaTagsOptions } from "../../../constant/meta";
+import { BasicSearch } from "../../../components/basic/BasicSearch";
+import { searchConfig } from "./config";
 
-const metaTagsOptions: SelectProps['options'] = [
-    {
-        value: metaTags.category,
-        label: '分类',
-    },
-    {
-        value: metaTags.tag,
-        label: '标签'
-    }
-]
 
 let initSearch = {
     type: metaTags.category
 }
-
 
 
 export default function ContentCategory() {
@@ -70,6 +62,7 @@ export default function ContentCategory() {
     const [list, setList] = useState<IMetaListResponseItem[]>([])
     const [searchForm] = Form.useForm()
     const onFinish: FormProps['onFinish'] = (value) => {
+        console.log(value);
         initSearch = value;
         fetchData();
     }
@@ -146,30 +139,10 @@ export default function ContentCategory() {
 
     return (
         <>
-            <Card>
-                <Form
-                    layout="horizontal"
-                    form={searchForm}
-                    onFinish={onFinish}
-                    initialValues={initSearch}
-                >
-                    <Row gutter={24}>
-                        <Col span={8}>
-                            <Form.Item label="类别" name='type'>
-                                <Select
-                                    options={metaTagsOptions}
-                                ></Select>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col span={24} className="text-right">
-                            <Button className="mr-5">重置</Button>
-                            <Button type="primary" htmlType="submit">查询</Button>
-                        </Col>
-                    </Row>
-                </Form>
-            </Card>
+            <BasicSearch
+                list={searchConfig}
+                onSearch={onFinish}
+            ></BasicSearch>
             {/* 列表 */}
             <Card className="mt-5">
                 <div className="mb-5 text-right">
