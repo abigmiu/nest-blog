@@ -1,6 +1,5 @@
 import { Input } from "antd";
 import { IBasicFormEditList } from "../../../../types/basic";
-import MarkDown from 'react-markdown'
 
 export const editFormConfig: IBasicFormEditList = [
     {
