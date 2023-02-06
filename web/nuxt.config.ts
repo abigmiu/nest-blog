@@ -1,10 +1,19 @@
-import svgLoader from 'vite-svg-loader';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import path from 'path';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     srcDir: 'src/',
     vite: {
-        plugins: [svgLoader()],
+        plugins: [
+            createSvgIconsPlugin({
+                iconDirs: [
+                    path.resolve(process.cwd(), './src/assets/svgs'),
+                ],
+                symbolId: 'icon-[dir]-[name]',
+                customDomId: '__svg__icons__dom__'
+            })
+        ],
     },
     css: [
         '@/assets/styles/_variable.css',
@@ -12,5 +21,7 @@ export default defineNuxtConfig({
         '@/assets/styles/animation.css',
         '@/assets/styles/common.css'
     ],
-    modules: ['@vueuse/nuxt']
+    modules: [
+        '@vueuse/nuxt',
+    ]
 });

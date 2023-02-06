@@ -11,13 +11,25 @@
             </div>
             <div>
                 <ul class="menus">
-                    <li
-                        v-for="menu in menus"
-                        :key="menu.id"
-                        class="menu-item"
-                    >
-                        <component :is="menu.icon" />
-                        <span class="menu-title">{{ menu.title }}</span>
+                    <li class="menu-item">
+                        <svg-icon icon-name="index" />
+                        <span class="menu-title">首页</span>
+                    </li>
+                    <li class="menu-item">
+                        <svg-icon icon-name="document" />
+                        <span class="menu-title">生活倒影</span>
+                    </li>
+                    <li class="menu-item">
+                        <svg-icon icon-name="link" />
+                        <span class="menu-title">社交</span>
+                    </li>
+                    <li class="menu-item">
+                        <svg-icon icon-name="message" />
+                        <span class="menu-title">留言</span>
+                    </li>
+                    <li class="menu-item">
+                        <svg-icon icon-name="baby" />
+                        <span class="menu-title">关于</span>
                     </li>
                 </ul>
                 <div class="avatar" />
@@ -26,44 +38,9 @@
     </Transition>
 </template>
 <script lang="ts" setup>
-import type { ILayoutHeaderMenu } from '@/types/layout';
 import { useThrottleFn } from '@vueuse/core';
 import { onMounted, onBeforeUnmount, ref } from 'vue';
-import type { Component } from 'vue';
-
-const staticPath = '/src/assets/svgs/header';
-const svgs: Record<string, Component> = import.meta.glob('/src/assets/svgs/header/*.svg', {
-    eager: true,
-    as: 'component',
-});
-
-const menus: ILayoutHeaderMenu[] = [
-    {
-        id: 1,
-        icon: svgs[`${staticPath}/index.svg`],
-        title: '首页',
-    },
-    {
-        id: 2,
-        icon: svgs[`${staticPath}/document.svg`],
-        title: '生活倒影',
-    },
-    {
-        id: 3,
-        icon: svgs[`${staticPath}/link.svg`],
-        title: '社交',
-    },
-    {
-        id: 4,
-        icon: svgs[`${staticPath}/message.svg`],
-        title: '留言',
-    },
-    {
-        id: 5,
-        icon: svgs[`${staticPath}/baby.svg`],
-        title: '关于',
-    },
-];
+import SvgIcon from '@/components/common/SvgIcon.vue';
 
 const isOverHalf = ref(false);
 let oldScrollTop = 0;
