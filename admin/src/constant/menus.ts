@@ -8,6 +8,10 @@ export const layoutMenus: MenuProps['items'] = [
             {
                 label: '公告',
                 key: '/website/announcement',
+            },
+            {
+                label: '设置',
+                key: '/website/setting'
             }
         ]
     },

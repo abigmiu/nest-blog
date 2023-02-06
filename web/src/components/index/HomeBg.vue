@@ -17,6 +17,7 @@ import { ref } from 'vue';
 
 const loadError = ref(false);
 const onError = () => {
+    console.log('on Error');
     loadError.value = true;
 };
 </script>

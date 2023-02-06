@@ -1,8 +1,6 @@
 <!-- 首页公告 -->
 <template>
-    <div
-        class="announcement"
-    >
+    <div class="announcement">
         <i
             class="fa fa-volume-up"
             aria-hidden="true"
@@ -19,6 +17,10 @@
     </div>
 </template>
 <script lang="ts" setup>
+import { cFetch } from '@/apis/http';
+const data = await cFetch('option/announcement');
+console.log(data);
+
 const notices: any[] = [];
 </script>
 <style lang="scss">

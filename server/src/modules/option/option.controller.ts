@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { announcementKeys, webInfoKeys } from 'src/constant/option';
 import { AdminAddOptionDto, AdminSetWebInfoDto } from 'src/dto/option/option-request.dto';
@@ -22,8 +22,22 @@ export class OptionController {
         return new WebInfoResponse(res);
     }
 
-    @ApiOperation({ summary: 'admin 设置网站信息' })
-    @Post('webInfo')
+    @ApiOperation({ summary: 'admin 获取可设置项' })
+    @ApiResponse({ type: AdminAddOptionDto, isArray: true })
+    @Get('setting')
+    async getSetting() {
+        return this.optionService.getOption(webInfoKeys);
+    }
+
+    @ApiOperation({ summary: 'admin 添加可设置项' })
+    @ApiResponse({ type: AdminAddOptionDto })
+    @Post('setting')
+    async createSetting(@Body() body: AdminAddOptionDto) {
+        return this.optionService.createSetting(body);
+    }
+
+    @ApiOperation({ summary: 'admin 更新网站信息' })
+    @Put('setting')
     async setWebInfo(@Body() data: AdminSetWebInfoDto) {
         return this.optionService.updateWebInfo(data);
     }
@@ -45,11 +59,5 @@ export class OptionController {
     @Post('announcement')
     async updateAnnouncement(@Body() data: string[]) {
         return this.optionService.createOrUpdateAnnouncement(data);
-    }
-
-    @ApiOperation({ summary: '创建网站选项' })
-    @Post('create')
-    async createOption(@Body() data: AdminAddOptionDto) {
-        return this.optionService.createOption(data);
     }
 }

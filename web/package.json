@@ -20,6 +20,7 @@
     "vite-svg-loader": "^4.0.0"
   },
   "dependencies": {
-    "@icon-park/vue-next": "^1.4.2"
+    "@icon-park/vue-next": "^1.4.2",
+    "@pinia/nuxt": "^0.4.6"
   }
 }

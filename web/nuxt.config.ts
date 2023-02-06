@@ -14,6 +14,14 @@ export default defineNuxtConfig({
                 customDomId: '__svg__icons__dom__'
             })
         ],
+        server: {
+            proxy: {
+                '/api': {
+                    target: 'http://127.0.0.1:3005',
+                    changeOrigin: true,
+                }
+            }
+        }
     },
     css: [
         '@/assets/styles/_variable.css',
@@ -23,5 +31,6 @@ export default defineNuxtConfig({
     ],
     modules: [
         '@vueuse/nuxt',
-    ]
+        '@pinia/nuxt',
+    ],
 });
