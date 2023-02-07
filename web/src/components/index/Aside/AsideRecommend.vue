@@ -29,6 +29,7 @@
     </div>
 </template>
 <script lang="ts" setup>
+import { BookOpen, CalendarThree } from '@icon-park/vue-next';
 const recommendList: any[] = [];
 
 </script>

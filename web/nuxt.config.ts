@@ -14,14 +14,14 @@ export default defineNuxtConfig({
                 customDomId: '__svg__icons__dom__'
             })
         ],
-        server: {
-            proxy: {
-                '/api': {
-                    target: 'http://127.0.0.1:3005',
-                    changeOrigin: true,
-                }
-            }
-        }
+        // server: {
+        //     proxy: {
+        //         '/api': {
+        //             target: 'http://127.0.0.1:3005',
+        //             changeOrigin: true,
+        //         }
+        //     }
+        // }
     },
     css: [
         '@/assets/styles/_variable.css',
@@ -33,4 +33,14 @@ export default defineNuxtConfig({
         '@vueuse/nuxt',
         '@pinia/nuxt',
     ],
+
+    nitro: {
+        devProxy: {
+            '/api': {
+                target: "http://127.0.0.1:3005/api",
+                changeOrigin: true,
+                prependPath: true,
+            },
+        }
+    },
 });

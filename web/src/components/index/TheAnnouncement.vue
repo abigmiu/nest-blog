@@ -1,27 +1,24 @@
 <!-- 首页公告 -->
 <template>
     <div class="announcement">
-        <i
-            class="fa fa-volume-up"
-            aria-hidden="true"
-        />
+        <i class="fa fa-volume-up" aria-hidden="true" />
         <div>
-            <p
-                v-for="(notice, index) in notices"
-                :key="index"
-                class="content"
-            >
+            <p v-for="(notice, index) in notices" :key="index" class="content">
                 {{ notice }}
             </p>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { cFetch } from '@/apis/http';
-const data = await cFetch('option/announcement');
-console.log(data);
+import { reactive } from 'vue'
+import { IResponse } from '~~/src/types/base';
+const notices = reactive<string[]>([]);
+const { data } = await useFetch<IResponse<string[]>>('/api/option/announcement')
+if (data.value) {
+    notices.push(...data.value.data)
+}
 
-const notices: any[] = [];
+console.log(123)
 </script>
 <style lang="scss">
 /* 放大 */

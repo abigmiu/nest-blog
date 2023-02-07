@@ -17,13 +17,20 @@ export class TransformInterceptor implements NestInterceptor {
         if (request.method.toUpperCase() === 'POST' && response.statusCode === HttpStatus.CREATED) {
             response.status(HttpStatus.OK);
         }
+        if (request.method.toUpperCase() === 'GET' && response.statusCode == HttpStatus.OK) {
+            response.status(HttpStatus.OK);
+        }
 
         return next.handle().pipe(
-            map((data) => ({
-                code: HttpStatus.OK,
-                data: data || null,
-                msg: 'ok',
-            })),
+            map((data) => {
+                const ret = {
+                    code: HttpStatus.OK,
+                    data: data || null,
+                    msg: 'ok',
+                };
+                console.log(ret);
+                return ret;
+            }),
         );
     }
 }

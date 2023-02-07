@@ -11,10 +11,11 @@ import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { GlobalExceptionFilter } from './filter/globalException.filter';
 import { HttpExceptionFilter } from './filter/httpException.filter';
 import { ClassSerializerInterceptor } from '@nestjs/common';
+import { RequestInterceptor } from './interceptor/request.interceptor';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-        logger: ['error', 'debug'],
+        // logger: ['error', 'debug'],
     });
 
     const config = app.get(ConfigService);
@@ -26,6 +27,7 @@ async function bootstrap() {
     app.useGlobalPipes(new ValidationPipe());
     app.useGlobalInterceptors(new TransformInterceptor());
     app.useGlobalFilters(new GlobalExceptionFilter(), new HttpExceptionFilter());
+    app.useGlobalInterceptors(new RequestInterceptor());
     app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
     const globalPrefix = config.get<string>('globalPrefix');
