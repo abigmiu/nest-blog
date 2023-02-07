@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 export class SharedEntity {
@@ -16,6 +17,7 @@ export class SharedEntity {
     })
     updateAt: Date;
 
+    @Exclude()
     @Column({
         comment: '软删除',
         default: false,

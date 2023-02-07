@@ -3,7 +3,7 @@
     <IndexHomeIntro />
     <main class="home-main">
         <HomeAside />
-        <div>
+        <div class="flex-1">
             <TheAnnouncement />
         </div>
     </main>

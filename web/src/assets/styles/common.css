@@ -17,3 +17,7 @@
 .shadow-box:hover {
     box-shadow: 0 5px 10px 5px var(--borderHoverColor);
 }
+
+.flex-1 {
+    flex: 1 1 0%;
+  }

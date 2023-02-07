@@ -2,23 +2,22 @@
 <template>
     <div class="announcement">
         <i class="fa fa-volume-up" aria-hidden="true" />
-        <div>
+
+        <div v-if="notices.length">
             <p v-for="(notice, index) in notices" :key="index" class="content">
                 {{ notice }}
             </p>
         </div>
+        <div v-else>暂无公告</div>
     </div>
 </template>
 <script lang="ts" setup>
-import { reactive } from 'vue'
 import { IResponse } from '~~/src/types/base';
 const notices = reactive<string[]>([]);
 const { data } = await useFetch<IResponse<string[]>>('/api/option/announcement')
 if (data.value) {
     notices.push(...data.value.data)
 }
-
-console.log(123)
 </script>
 <style lang="scss">
 /* 放大 */

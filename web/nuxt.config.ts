@@ -41,6 +41,6 @@ export default defineNuxtConfig({
                 changeOrigin: true,
                 prependPath: true,
             },
-        }
+        },
     },
 });
