@@ -16,7 +16,7 @@ export class ValidationPipe implements PipeTransform<any> {
             const firstErrMsg = Object.values(constraints)[0];
             throw new BadRequestException(firstErrMsg);
         }
-        return value;
+        return object;
     }
 
     private toValidate(metatype: any): boolean {
