@@ -30,6 +30,10 @@ export class CreateContentDto {
     @IsString()
     text: string;
 
+    @ApiProperty({ description: '摘要' })
+    @IsString()
+    summary: string;
+
     @ApiProperty({ description: '权重' })
     @IsInt()
     @Min(0)

@@ -11,6 +11,11 @@ export class ContentEntity extends SharedEntity {
     title?: string;
 
     @Column({
+        comment: '摘要',
+    })
+    summary: string;
+
+    @Column({
         length: 200,
         nullable: true,
         comment: '缩写',

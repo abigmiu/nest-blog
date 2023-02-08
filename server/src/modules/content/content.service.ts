@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ArticleItemResponse } from 'src/dto/content/content-response.dto';
 import { CreateContentDto, CreateWallpaperDto } from 'src/dto/content/create-content.dto';
-import { QueryWallpaperPageDto } from 'src/dto/content/query-meta.dto';
+import { QueryContentPageDto, QueryWallpaperPageDto } from 'src/dto/content/query-content.dto';
 import { ContentEntity } from 'src/entities/content/content.entity';
 import { MetaEntity } from 'src/entities/metas/meta.entity';
 import { WallpaperEntity } from 'src/entities/wallpaper/wallpaper.entity';
+import { createResponse } from 'src/utils/response';
 import { Repository } from 'typeorm';
 import { MetaService } from '../meta/meta.service';
 
@@ -29,6 +31,7 @@ export class ContentService {
         content.title = data.title;
         content.text = data.text;
         content.allowComment = data.allowComment;
+        content.summary = data.summary || data.text.slice(200);
         content.order = data.order;
         content.slug = data.slug;
         content.status = data.status;
@@ -36,6 +39,19 @@ export class ContentService {
         content.type = data.type;
 
         await this.contentRepo.save(content);
+    }
+
+    /** 获取文章分页 */
+    async getArticlePage(query: QueryContentPageDto) {
+        const res = await this.contentRepo.find({
+            where: {
+                isDel: false,
+            },
+            take: query.size,
+            skip: (query.page - 1) * query.size,
+        });
+
+        return res.map((item) => createResponse(ArticleItemResponse, item));
     }
 
     /** 创建壁纸 */

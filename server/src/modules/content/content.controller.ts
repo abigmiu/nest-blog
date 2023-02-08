@@ -2,7 +2,7 @@ import { Controller, Post, Body, Get, Query, Param, Put } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { WallpaperResponse } from 'src/dto/content/content-response.dto';
 import { CreateContentDto, CreateWallpaperDto } from 'src/dto/content/create-content.dto';
-import { QueryWallpaperPageDto } from 'src/dto/content/query-meta.dto';
+import { QueryContentPageDto, QueryWallpaperPageDto } from 'src/dto/content/query-content.dto';
 import { IdParam } from 'src/dto/param.dto';
 import { ContentService } from './content.service';
 
@@ -15,6 +15,12 @@ export class ContentController {
     @Post()
     createContent(@Body() data: CreateContentDto) {
         return this.contentService.create(data);
+    }
+
+    @ApiOperation({ summary: '获取文章分页' })
+    @Get('page')
+    getArticlePage(@Query() query: QueryContentPageDto) {
+        return this.contentService.getArticlePage(query);
     }
 
     @ApiOperation({ summary: '获取壁纸分页' })
