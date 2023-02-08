@@ -23,10 +23,10 @@ const { data } = await useFetch<IResponse<IMetaResponse[]>>('/api/meta', {
     query: {
         type: 'category'
     }
-})
+});
 console.log(data);
 if (data.value) {
-    categories.push(...data.value.data)
+    categories.push(...data.value.data);
 }
 </script>
 <style lang="scss">

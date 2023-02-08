@@ -1,5 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsInt, IsOptional, IsString, Length, Min } from 'class-validator';
+import {
+    IsArray,
+    IsBoolean,
+    IsInt,
+    IsOptional,
+    IsString,
+    IsUrl,
+    Length,
+    Min,
+} from 'class-validator';
 import { MetaEntity } from 'src/entities/metas/meta.entity';
 
 export class CreateContentDto {
@@ -53,5 +62,19 @@ export class CreateContentDto {
 
     @ApiProperty({ description: '标签' })
     @IsArray()
+    tags: string[];
+}
+
+/** 创建壁纸 */
+export class CreateWallpaperDto {
+    @ApiProperty({ description: 'url' })
+    @IsUrl()
+    url: string;
+
+    @ApiProperty({ description: '备注' })
+    @IsOptional()
+    remark: string;
+
+    @ApiProperty({ description: '标签名', isArray: true, type: 'string' })
     tags: string[];
 }

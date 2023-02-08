@@ -26,6 +26,10 @@ export const layoutMenus: MenuProps['items'] = [
             {
                 label: '文章',
                 key: '/content/article'
+            },
+            {
+                label: '壁纸',
+                key: '/content/wallpaper'
             }
         ]
     }
