@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ArticleItemResponse } from 'src/dto/content/content-response.dto';
+import { ArticleDetailResponse, ArticleItemResponse } from 'src/dto/content/content-response.dto';
 import { CreateContentDto, CreateWallpaperDto } from 'src/dto/content/create-content.dto';
 import { QueryContentPageDto, QueryWallpaperPageDto } from 'src/dto/content/query-content.dto';
 import { ContentEntity } from 'src/entities/content/content.entity';
@@ -86,5 +86,30 @@ export class ContentService {
         });
 
         return res;
+    }
+
+    /** 获取文章详情 */
+    async getArticleDetail(id: number) {
+        const res = await this.contentRepo.findOne({
+            where: {
+                isDel: false,
+                id,
+            },
+        });
+
+        return createResponse(ArticleDetailResponse, res);
+    }
+
+    async deleteArticle(id: number) {
+        const res = await this.contentRepo.findOne({
+            where: {
+                isDel: false,
+                id,
+            },
+        });
+
+        res.isDel = true;
+
+        await this.contentRepo.save(res);
     }
 }

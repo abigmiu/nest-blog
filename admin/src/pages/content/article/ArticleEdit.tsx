@@ -2,12 +2,15 @@
 
 import { Card, Form, Input, Button, message } from "antd"
 import MDEditor from '@uiw/react-md-editor';
-import { useState } from "react";
+import { useDebugValue, useEffect, useState } from "react";
 import { contentService } from "../../../services/content";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const ArticleEdit: React.FC = () => {
     const [form] = Form.useForm()
     let [content, setContent] = useState('');
+
+    const navigate = useNavigate();
 
     const onSubmit = async (value: any) => {
         await contentService.addArticle({
@@ -16,7 +19,21 @@ export const ArticleEdit: React.FC = () => {
             tags: [],
         });
         message.success('提交成功')
+        navigate('/content/article')
     }
+
+    const fetchData = async (id: number) => {
+        const data = await contentService.getArticleDetail(id);
+        form.setFieldsValue(data);
+    }
+
+    const [params] = useSearchParams()
+    useEffect(() => {
+        const id = params.get('id');
+        if (typeof id === 'string' && /^\d+$/.test(id)) {
+            fetchData(+id);
+        }
+    }, [])
 
     return (
         <Card>
@@ -29,6 +46,9 @@ export const ArticleEdit: React.FC = () => {
                         value={content}
                         onChange={(value) => setContent(value || '')}
                     ></MDEditor>
+                </Form.Item>
+                <Form.Item label="摘要" name="summary">
+                    <Input.TextArea />
                 </Form.Item>
                 <Form.Item>
                     <div className="text-right">

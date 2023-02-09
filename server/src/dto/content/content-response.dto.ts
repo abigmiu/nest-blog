@@ -47,6 +47,12 @@ export class ArticleItemResponse {
     allowComment: boolean;
 }
 
+export class ArticleDetailResponse extends ArticleItemResponse {
+    @Expose()
+    @ApiProperty({ description: '文章内容' })
+    text: string;
+}
+
 export class WallpaperResponse {
     @ApiProperty({ description: 'url' })
     url: string;

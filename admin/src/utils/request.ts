@@ -37,16 +37,13 @@ export function request<T>(url: string, config?: AxiosRequestConfig): Promise<T>
 }
 
 /** 获取可取消的请求 */
-export function withCancelToken(fetcher: typeof request) {
+export function withCancelToken<K, A, B, C, D>(fetcher: (arg1?: A, arg2?: B, arg3?: C, arg4?: D) => K) {
     let controller: AbortController;
 
-    function send(url: string, config: AxiosRequestConfig = {}) {
+    function send(arg1?: A, arg2?: B, arg3?: C, arg4?: D) {
         cancel();
         controller = new AbortController();
-        return fetcher(url, {
-            ...config,
-            signal: controller.signal
-        })
+        return fetcher(arg1, arg2, arg3, arg4)
     }
 
     function cancel() {

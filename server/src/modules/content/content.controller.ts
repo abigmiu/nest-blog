@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Query, Param, Put } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query, Param, Put, Delete } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { WallpaperResponse } from 'src/dto/content/content-response.dto';
 import { CreateContentDto, CreateWallpaperDto } from 'src/dto/content/create-content.dto';
@@ -21,6 +21,18 @@ export class ContentController {
     @Get('page')
     getArticlePage(@Query() query: QueryContentPageDto) {
         return this.contentService.getArticlePage(query);
+    }
+
+    @ApiOperation({ summary: '获取文章详情' })
+    @Get(':id')
+    getArticleDetail(@Param() param: IdParam) {
+        return this.contentService.getArticleDetail(param.id);
+    }
+
+    @ApiOperation({ summary: '删除文章' })
+    @Delete(':id')
+    deleteArticle(@Param() param: IdParam) {
+        return this.contentService.deleteArticle(param.id);
     }
 
     @ApiOperation({ summary: '获取壁纸分页' })
