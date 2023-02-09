@@ -2,7 +2,7 @@
 <template>
     <div>
         <div class="discover-title">
-            <DiscoverSvg />发现
+            <svg-icon icon-name="discover" />发现
         </div>
         <div class="post-list">
             <PostItem
@@ -29,8 +29,24 @@
     </div>
 </template>
 <script lang="ts" setup>
-const articles: any[] = [];
-const totalSize = 0;
+import PostItem from './PostItem.vue';
+import { IArticleResponseItem } from '~~/src/types/article';
+import { IResponse } from '~~/src/types/base';
+
+const articles = reactive<IArticleResponseItem[]>([]);
+
+let totalSize = 0;
+const query = {
+    page: 1,
+    size: 10,
+};
+const { data } = await useFetch<IResponse<IArticleResponseItem[]>>('/api/content/page', {
+    params: query,
+});
+if (data.value && data.value.data) {
+    // articles.length = 0;
+    articles.push(...data.value.data);
+}
 </script>
 <style lang="scss">
 .discover-title {

@@ -5,12 +5,14 @@
         <HomeAside />
         <div class="flex-1">
             <TheAnnouncement />
+            <PostList />
         </div>
     </main>
 </template>
 <script lang="ts" setup>
 import HomeAside from '@/components/index/HomeAside.vue';
 import TheAnnouncement from '@/components/index/TheAnnouncement.vue';
+import PostList from '@/components/index/Post/PostList.vue';
 </script>
 <style lang="scss">
 .home-main {

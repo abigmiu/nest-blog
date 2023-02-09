@@ -33,7 +33,7 @@ if (data.value) {
 .category-item {
     border-radius: 1rem;
     margin-bottom: 15px;
-    line-height: 30px;
+    line-height: 30px; 
     transition: all 0.3s;
 
     &:hover {

@@ -6,51 +6,55 @@
     >
         <div class="cover">
             <img
-                :src="source.articleCover"
+             
                 alt=""
             >
         </div>
         <div class="content">
             <div class="post-meta">
                 <i>
-                    <component :is="svgs.calendar" />
+                    <svg-icon icon-name="calendar" />
                 </i>
 
-                发布于 {{ source.createTime }}
+                发布于 {{ source.createAt }}
             </div>
             <h3 class="title">
-                {{ source.articleTitle }}
+                {{ source.title }}
             </h3>
             <div class="post-meta">
                 <span>
-                    <component :is="svgs.fire" /> {{ source.viewCount }} 热度
+                    <svg-icon icon-name="fire" /> {{ source.commentsNum }} 热度
                 </span>
                 <span>
-                    <component :is="svgs.comment" /> {{ source.commentCount }} 条评论
+                    <svg-icon icon-name="comment" /> {{ source.commentsNum }} 条评论
                 </span>
                 <span>
-                    <component :is="svgs.heart" /> {{ source.likeCount }} 点赞
+                    <svg-icon icon-name="heart" /> {{ source.commentsNum }} 点赞
                 </span>
             </div>
             <div class="desc">
-                {{ source.articleContent }}
+                {{ source.summary }}
             </div>
             <div class="label-wrapper">
                 <div class="label">
-                    <component :is="svgs.folder" /> {{ source.sort.sortName }}
+                    <svg-icon icon-name="folder" />
                 </div>
                 <div class="label">
-                    <component :is="svgs.label" /> {{ source.label.labelName }}
+                    <svg-icon icon-name="label" />
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
+import SvgIcon from '@/components/common/SvgIcon.vue';
+import { IArticleResponseItem } from '~~/src/types/article';
 
-const isEven = false;
-const source: any = {};
-const svgs: any = {};
+interface IProps {
+    source: IArticleResponseItem,
+    isEven: boolean;
+}
+const props = defineProps<IProps>();
 </script>
 
 <style lang="scss">
