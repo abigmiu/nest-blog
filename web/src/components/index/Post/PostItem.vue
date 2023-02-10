@@ -6,7 +6,7 @@
     >
         <div class="cover">
             <img
-             
+                :src="source.cover"
                 alt=""
             >
         </div>

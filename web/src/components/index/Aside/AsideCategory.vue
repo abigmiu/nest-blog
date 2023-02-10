@@ -15,11 +15,12 @@
     </div>
 </template>
 <script lang="ts" setup>
+import { cFetch } from '~~/src/apis/http';
 import type { IResponse } from '~~/src/types/base';
 import type { IMetaResponse } from '~~/src/types/meta';
 const categories = reactive<IMetaResponse[]>([]);
 
-const { data } = await useFetch<IResponse<IMetaResponse[]>>('/api/meta', {
+const { data } = await cFetch<IResponse<IMetaResponse[]>>('/api/meta', {
     query: {
         type: 'category'
     }

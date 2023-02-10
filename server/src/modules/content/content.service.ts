@@ -6,6 +6,7 @@ import { QueryContentPageDto, QueryWallpaperPageDto } from 'src/dto/content/quer
 import { ContentEntity } from 'src/entities/content/content.entity';
 import { MetaEntity } from 'src/entities/metas/meta.entity';
 import { WallpaperEntity } from 'src/entities/wallpaper/wallpaper.entity';
+import { getRound } from 'src/utils/number';
 import { createResponse } from 'src/utils/response';
 import { Repository } from 'typeorm';
 import { MetaService } from '../meta/meta.service';
@@ -51,6 +52,10 @@ export class ContentService {
             skip: (query.page - 1) * query.size,
         });
 
+        for (let i = 0; i < res.length; i++) {
+            const item = res[i];
+            item.cover = item.cover || (await this.getRoundWallpaper());
+        }
         return res.map((item) => createResponse(ArticleItemResponse, item));
     }
 
@@ -62,6 +67,20 @@ export class ContentService {
         wallpaper.url = data.url;
 
         await this.wallpaperRepo.save(wallpaper);
+    }
+
+    /** 获取随机壁纸 */
+    async getRoundWallpaper() {
+        const list = await this.wallpaperRepo.find({
+            where: {
+                isDel: false,
+            },
+        });
+
+        const ids = list.map((wallpaper) => wallpaper.id);
+
+        const roundNum = getRound(0, ids.length - 1);
+        return list[roundNum].url;
     }
 
     /** 切换冻结状态 */
@@ -100,6 +119,7 @@ export class ContentService {
         return createResponse(ArticleDetailResponse, res);
     }
 
+    /** 删除文章 */
     async deleteArticle(id: number) {
         const res = await this.contentRepo.findOne({
             where: {

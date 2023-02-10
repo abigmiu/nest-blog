@@ -3,6 +3,7 @@ export interface IArticleResponseItem {
     createAt: string;
     updateAt: string;
     title: string;
+    cover: string;
     summary: string;
     slug?: any;
     order: number;

@@ -32,6 +32,7 @@
 import PostItem from './PostItem.vue';
 import { IArticleResponseItem } from '~~/src/types/article';
 import { IResponse } from '~~/src/types/base';
+import { cFetch } from '~~/src/apis/http';
 
 const articles = reactive<IArticleResponseItem[]>([]);
 
@@ -40,13 +41,19 @@ const query = {
     page: 1,
     size: 10,
 };
-const { data } = await useFetch<IResponse<IArticleResponseItem[]>>('/api/content/page', {
-    params: query,
-});
-if (data.value && data.value.data) {
-    // articles.length = 0;
-    articles.push(...data.value.data);
-}
+
+const fetchData = async () => {
+    const { data } = await cFetch<IResponse<IArticleResponseItem[]>>('/api/content/page', {
+        params: query,
+    });
+    if (data.value && data.value.data) {
+        // articles.length = 0;
+        articles.push(...data.value.data);
+    }
+};
+
+fetchData();
+
 </script>
 <style lang="scss">
 .discover-title {

@@ -34,13 +34,14 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
     ],
 
-    nitro: {
-        devProxy: {
-            '/api': {
-                target: "http://127.0.0.1:3005/api",
-                changeOrigin: true,
-                prependPath: true,
-            },
-        },
-    },
+    // nitro: {
+    //     devProxy: {
+    //         '/devApi': {
+    //             target: 'http://127.0.0.1:3005/',
+    //             changeOrigin: true,
+    //             prependPath: true,
+    //             rewrite: (path: string) => path.replace(/^\/devApi/, ''),
+    //         },
+    //     },
+    // },
 });

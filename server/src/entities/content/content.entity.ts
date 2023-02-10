@@ -28,6 +28,9 @@ export class ContentEntity extends SharedEntity {
     })
     text: string;
 
+    @Column({ comment: '封面图' })
+    cover: string;
+
     @Column({
         default: 0,
         comment: '排序',

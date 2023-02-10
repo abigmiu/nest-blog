@@ -18,6 +18,10 @@ export class ArticleItemResponse {
     @Expose()
     title: string;
 
+    @ApiProperty({ description: '封面图' })
+    @Expose()
+    cover: string;
+
     @ApiProperty({ description: '摘要' })
     @Expose()
     summary: string;
