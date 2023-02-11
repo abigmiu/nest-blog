@@ -32,13 +32,21 @@ export class ContentService {
         content.title = data.title;
         content.text = data.text;
         content.allowComment = data.allowComment;
-        content.summary = data.summary || data.text.slice(200);
+        content.summary = data.summary || data.text.slice(150);
         content.order = data.order;
         content.slug = data.slug;
         content.status = data.status;
         content.password = data.password;
         content.type = data.type;
 
+        await this.contentRepo.save(content);
+    }
+
+    /** 更新内容 */
+    async update(id: number, data: CreateContentDto) {
+        const content = new ContentEntity();
+        content.id = id;
+        content.text = data.text;
         await this.contentRepo.save(content);
     }
 

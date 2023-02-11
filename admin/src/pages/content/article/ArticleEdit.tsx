@@ -10,14 +10,30 @@ export const ArticleEdit: React.FC = () => {
     const [form] = Form.useForm()
     let [content, setContent] = useState('');
 
+    let id = 0
+    const [params] = useSearchParams()
+    const paramId = params.get('id');
+    if (typeof paramId === 'string' && /^\d+$/.test(paramId)) {
+        id = +paramId
+    }
+
     const navigate = useNavigate();
 
     const onSubmit = async (value: any) => {
-        await contentService.addArticle({
-            ...value,
-            categories: [],
-            tags: [],
-        });
+        if (id) {
+            await contentService.updateArticle(id, {
+                ...value,
+                categories: [],
+                tags: [],
+            });
+        } else {
+            await contentService.addArticle({
+                ...value,
+                categories: [],
+                tags: [],
+            });
+        }
+
         message.success('提交成功')
         navigate('/content/article')
     }
@@ -27,12 +43,13 @@ export const ArticleEdit: React.FC = () => {
         form.setFieldsValue(data);
     }
 
-    const [params] = useSearchParams()
+
     useEffect(() => {
-        const id = params.get('id');
-        if (typeof id === 'string' && /^\d+$/.test(id)) {
+        if (id) {
             fetchData(+id);
         }
+
+
     }, [])
 
     return (

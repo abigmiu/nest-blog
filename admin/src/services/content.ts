@@ -12,6 +12,14 @@ class ContentService {
         })
     }
 
+    /** 更新文章 */
+    updateArticle(id: number, data: any) {
+        return request(`${this.prefix}/${id}`, {
+            method: 'PUT',
+            data,
+        })
+    }
+
     /** 文章分页 */
     getArticlePage(query?: Record<string, any>, id?: number) {
         return request<IArticleResponseItem[]>(`${this.prefix}/page`, {

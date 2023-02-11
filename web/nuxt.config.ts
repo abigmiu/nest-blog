@@ -27,7 +27,8 @@ export default defineNuxtConfig({
         '@/assets/styles/_variable.css',
         '@/assets/styles/reset.css',
         '@/assets/styles/animation.css',
-        '@/assets/styles/common.css'
+        '@/assets/styles/common.css',
+        '@icon-park/vue-next/styles/index.css',
     ],
     modules: [
         '@vueuse/nuxt',

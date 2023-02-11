@@ -29,6 +29,7 @@
     </div>
 </template>
 <script lang="ts" setup>
+import SvgIcon from '@/components/common/SvgIcon.vue';
 import PostItem from './PostItem.vue';
 import { IArticleResponseItem } from '~~/src/types/article';
 import { IResponse } from '~~/src/types/base';
@@ -53,6 +54,9 @@ const fetchData = async () => {
 };
 
 fetchData();
+
+const router = useRouter()
+console.log(router)
 
 </script>
 <style lang="scss">

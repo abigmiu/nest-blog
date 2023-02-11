@@ -17,6 +17,12 @@ export class ContentController {
         return this.contentService.create(data);
     }
 
+    @ApiOperation({ summary: '更新文章' })
+    @Put(':id')
+    updateContent(@Param() param: IdParam, @Body() data: CreateContentDto) {
+        return this.contentService.update(param.id, data);
+    }
+
     @ApiOperation({ summary: '获取文章分页' })
     @Get('page')
     getArticlePage(@Query() query: QueryContentPageDto) {

@@ -8,6 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@types/markdown-it": "^12.2.3",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "@vueuse/core": "^9.12.0",
@@ -21,6 +22,8 @@
   },
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
-    "@pinia/nuxt": "^0.4.6"
+    "@pinia/nuxt": "^0.4.6",
+    "markdown-it": "^13.0.1",
+    "tocbot": "^4.20.1"
   }
 }

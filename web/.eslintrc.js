@@ -30,7 +30,8 @@ module.exports = {
             args: 'none',
             ignoreRestSiblings: true,
         }],
-        "vue/html-indent": ['error', 4]
+        "vue/html-indent": ['error', 4],
+        "vue/multi-word-component-names": false,
     },
     "overrides": [
         {

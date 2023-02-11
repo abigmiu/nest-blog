@@ -32,3 +32,8 @@ li {
             transparent);
     border-radius: 1em;
 }
+
+a {
+    text-decoration: none;
+    color: unset;
+}

@@ -28,7 +28,7 @@ export class ContentEntity extends SharedEntity {
     })
     text: string;
 
-    @Column({ comment: '封面图' })
+    @Column({ comment: '封面图', nullable: true })
     cover: string;
 
     @Column({
