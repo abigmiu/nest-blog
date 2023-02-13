@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="article-head my-animation-slide-top">
-            <img :src="source.cover" class="article-image" />
+            <img :src="source.cover" class="article-image">
 
             <div class="article-info-container">
                 <div class="article-title">{{ source.title }}</div>
@@ -65,9 +65,6 @@ const fetchData = async () => {
 /** 渲染内容 */
 const renderContent = (content: string) => {
     contentForHTML.value = new MarkdownIt({ breaks: true }).render(content);
-    nextTick(() => {
-        initToc();
-    })
 }
 
 /** 渲染标题 */
@@ -92,7 +89,12 @@ fetchData()
 .article-head {
     height: 40vh;
     position: relative;
+}
 
+.article-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
     &::before {
         position: absolute;
         width: 100%;

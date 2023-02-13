@@ -35,10 +35,14 @@ export const ArticlePage: React.FC = () => {
 
     const navigator = useNavigate();
     const onEdit = (id?: number) => {
+        console.log(id)
         if (id) {
             return navigator(`edit?id=${id}`);
+        } else {
+            console.log(123);
+            navigator('edit')
         }
-        navigator('edit')
+
     }
     const onDelete = async (id: number) => {
         await contentService.deleteArticle(id)
@@ -70,7 +74,7 @@ export const ArticlePage: React.FC = () => {
             ></BasicSearch>
             {/* 列表 */}
             <BasicTable
-                onCreate={() => onEdit}
+                onCreate={() => onEdit()}
                 columns={columns}
                 dataSource={listData}
                 scroll={{ x: true }}

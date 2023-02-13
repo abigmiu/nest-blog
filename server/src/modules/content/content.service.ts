@@ -56,6 +56,9 @@ export class ContentService {
             where: {
                 isDel: false,
             },
+            order: {
+                id: 'DESC',
+            },
             take: query.size,
             skip: (query.page - 1) * query.size,
         });
@@ -108,6 +111,9 @@ export class ContentService {
             where: {
                 isDel: false,
             },
+            order: {
+                id: 'DESC',
+            },
             take: query.size,
             skip: (query.page - 1) * query.size,
         });
@@ -123,7 +129,7 @@ export class ContentService {
                 id,
             },
         });
-
+        res.cover = await this.getRoundWallpaper();
         return createResponse(ArticleDetailResponse, res);
     }
 
