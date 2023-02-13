@@ -1,5 +1,6 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, JoinTable, ManyToMany } from 'typeorm';
 import { SharedEntity } from '../base';
+import { MetaEntity } from '../metas/meta.entity';
 
 @Entity('bb-contents')
 export class ContentEntity extends SharedEntity {
@@ -69,4 +70,8 @@ export class ContentEntity extends SharedEntity {
         default: true,
     })
     allowComment: boolean;
+
+    @ManyToMany(() => MetaEntity)
+    @JoinTable()
+    metas: MetaEntity[];
 }

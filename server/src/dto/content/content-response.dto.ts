@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
+import { MetaEntity } from 'src/entities/metas/meta.entity';
 
 export class ArticleItemResponse {
     @ApiProperty({ description: 'id' })
@@ -49,6 +50,14 @@ export class ArticleItemResponse {
     @ApiProperty({ description: '允许评论' })
     @Expose()
     allowComment: boolean;
+
+    @ApiProperty({ description: '分类 ID', isArray: true })
+    @Expose()
+    categories: MetaEntity[];
+
+    @ApiProperty({ description: '标签 ID', isArray: true })
+    @Expose()
+    tags: MetaEntity[];
 }
 
 export class ArticleDetailResponse extends ArticleItemResponse {

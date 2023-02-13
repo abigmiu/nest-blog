@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { metaTypes } from 'src/constant/meta';
 import { ArticleDetailResponse, ArticleItemResponse } from 'src/dto/content/content-response.dto';
 import { CreateContentDto, CreateWallpaperDto } from 'src/dto/content/create-content.dto';
 import { QueryContentPageDto, QueryWallpaperPageDto } from 'src/dto/content/query-content.dto';
@@ -25,9 +26,20 @@ export class ContentService {
     async create(data: CreateContentDto) {
         const content = new ContentEntity();
 
-        const metas: MetaEntity[] = [...data.categories];
-        const tags = await this.metaService.createContentTags(data.tags);
-        metas.push(...tags);
+        const categories: MetaEntity[] = data.categories.map((id) => {
+            const meta = new MetaEntity();
+            meta.id = id;
+            meta.type = metaTypes.category;
+            return meta;
+        });
+        const tags: MetaEntity[] = data.tags.map((id) => {
+            const meta = new MetaEntity();
+            meta.id = id;
+            meta.type = metaTypes.tag;
+            return meta;
+        });
+
+        content.metas = [...categories, ...tags];
 
         content.title = data.title;
         content.text = data.text;
@@ -38,7 +50,7 @@ export class ContentService {
         content.status = data.status;
         content.password = data.password;
         content.type = data.type;
-
+        console.log(content);
         await this.contentRepo.save(content);
     }
 
@@ -61,13 +73,21 @@ export class ContentService {
             },
             take: query.size,
             skip: (query.page - 1) * query.size,
+            relations: ['metas'],
         });
 
         for (let i = 0; i < res.length; i++) {
             const item = res[i];
             item.cover = item.cover || (await this.getRoundWallpaper());
         }
-        return res.map((item) => createResponse(ArticleItemResponse, item));
+        const response = res.map((item) => createResponse(ArticleItemResponse, item));
+        response.forEach((item, index) => {
+            const metas = res[index].metas;
+            item.categories = metas.filter((meta) => meta.type === metaTypes.category);
+            item.tags = metas.filter((meta) => meta.type === metaTypes.tag);
+        });
+
+        return response;
     }
 
     /** 创建壁纸 */
@@ -128,9 +148,14 @@ export class ContentService {
                 isDel: false,
                 id,
             },
+            relations: ['metas'],
         });
         res.cover = await this.getRoundWallpaper();
-        return createResponse(ArticleDetailResponse, res);
+        const response = createResponse(ArticleDetailResponse, res);
+        response.categories = res.metas.filter((meta) => meta.type === metaTypes.category);
+        response.tags = res.metas.filter((meta) => meta.type === metaTypes.tag);
+
+        return response;
     }
 
     /** 删除文章 */

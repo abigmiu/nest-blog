@@ -1,3 +1,5 @@
+import { IMetaListResponseItem } from "./base";
+
 export interface IArticleResponseItem {
     id: number;
     createAt: string;
@@ -11,6 +13,9 @@ export interface IArticleResponseItem {
     status?: any;
     commentsNum: number;
     allowComment: boolean;
+
+    categories: IMetaListResponseItem[];
+    tags: IMetaListResponseItem[];
 }
 
 export interface IArticleDetailResponse extends IArticleResponseItem {

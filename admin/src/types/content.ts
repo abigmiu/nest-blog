@@ -1,3 +1,4 @@
+import { IMetaListResponseItem } from "./meta";
 
 export interface IWallpaperResponseItem {
     id: number;
@@ -25,6 +26,9 @@ export interface IArticleResponseItem {
     status?: any;
     commentsNum: number;
     allowComment: boolean;
+
+    categories: IMetaListResponseItem[];
+    tags: IMetaListResponseItem[];
 }
 
 export interface IArticleDetailResponse extends IArticleResponseItem {

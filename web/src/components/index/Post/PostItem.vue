@@ -31,11 +31,11 @@
                     {{ source.summary }}
                 </div>
                 <div class="label-wrapper">
-                    <div class="label">
-                        <svg-icon icon-name="folder" />
+                    <div class="label" v-for="item in source.categories.slice(0, 1)" :key="item.id">
+                        <svg-icon icon-name="folder" />{{  item.name  }}
                     </div>
-                    <div class="label">
-                        <svg-icon icon-name="label" />
+                    <div class="label" v-for="item in source.tags.slice(0, 1)" :key="item.id">
+                        <svg-icon icon-name="label" /> {{ item.name  }}
                     </div>
                 </div>
             </div>
@@ -122,6 +122,7 @@ const props = defineProps<IProps>();
         position: absolute;
         bottom: 20px;
         display: flex;
+        flex-wrap: wrap;
     }
 
     .label {
@@ -135,6 +136,9 @@ const props = defineProps<IProps>();
         user-select: none;
         margin-right: 12px;
 
+        .svg-icon {
+            margin-right: 5px;
+        }
         &:hover {
             background-color: var(--themeBackground);
             color: var(--white);

@@ -20,3 +20,5 @@ export interface IBasicFormEditListItem extends IBasicFormItem {
 
 }
 export type IBasicFormEditList = Array<IBasicFormEditListItem>
+
+type NonNullable<T> = T extends null | undefined ? never : T;

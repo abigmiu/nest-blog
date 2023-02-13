@@ -9,7 +9,6 @@ import {
     Length,
     Min,
 } from 'class-validator';
-import { MetaEntity } from 'src/entities/metas/meta.entity';
 
 export class CreateContentDto {
     @ApiProperty({ description: '标题' })
@@ -60,13 +59,13 @@ export class CreateContentDto {
     @IsOptional()
     allowComment?: boolean;
 
-    @ApiProperty({ description: '分类' })
+    @ApiProperty({ description: '分类', isArray: true })
     @IsArray()
-    categories: MetaEntity[];
+    categories: number[];
 
-    @ApiProperty({ description: '标签' })
+    @ApiProperty({ description: '标签', isArray: true })
     @IsArray()
-    tags: string[];
+    tags: number[];
 }
 
 /** 创建壁纸 */

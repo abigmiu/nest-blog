@@ -1,4 +1,4 @@
-import { ICreateMetaRequest } from "../types/meta";
+import type { ICreateMetaRequest, IMetaListResponseItem } from "../types/meta";
 import { request } from "../utils/request";
 
 class MetaService {
@@ -16,6 +16,15 @@ class MetaService {
     deleteMeta(id: number) {
         return request(`${this.prefix}/${id}`, {
             method: 'DELETE',
+        })
+    }
+
+    /** 获取 meta 列表 */
+    getMetaList(type: string) {
+        return request<IMetaListResponseItem[]>(this.prefix, {
+            params: {
+                type,
+            }
         })
     }
 }
