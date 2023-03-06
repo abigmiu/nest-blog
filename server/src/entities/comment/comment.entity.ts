@@ -17,8 +17,8 @@ export class CommentEntity extends SharedEntity {
     author: string;
 
     @Column({
-        default: 0,
         comment: '评论用户ID',
+        nullable: true,
     })
     authorId: number;
 
@@ -31,18 +31,21 @@ export class CommentEntity extends SharedEntity {
     @Column({
         length: 200,
         comment: '评论用户网址',
+        nullable: true,
     })
     url: string;
 
     @Column({
         length: 64,
         comment: '评论IP',
+        nullable: true,
     })
     ip: string;
 
     @Column({
         length: 200,
         comment: '评论 useAgent',
+        nullable: true,
     })
     agent: string;
 
