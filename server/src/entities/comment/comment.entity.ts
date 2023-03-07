@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { SharedEntity } from '../base';
 import { ContentEntity } from '../content/content.entity';
@@ -16,12 +17,14 @@ export class CommentEntity extends SharedEntity {
     })
     author: string;
 
+    @Exclude()
     @Column({
         comment: '评论用户ID',
         nullable: true,
     })
     authorId: number;
 
+    @Exclude()
     @Column({
         length: 200,
         comment: '评论用户邮箱',
@@ -35,6 +38,7 @@ export class CommentEntity extends SharedEntity {
     })
     url: string;
 
+    @Exclude()
     @Column({
         length: 64,
         comment: '评论IP',

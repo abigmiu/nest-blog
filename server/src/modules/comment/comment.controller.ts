@@ -1,11 +1,17 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { CreateCommentDto } from 'src/dto/comment/comment-create.dto';
+import { QueryCommentDto } from 'src/dto/comment/comment-query.dto';
 import { IdParam } from 'src/dto/param.dto';
 import { CommentService } from './comment.service';
 
 class createCommentIdParam extends IdParam {
     @ApiProperty({ description: '内容 ID' })
+    id: number;
+}
+
+class replyCommentIdParam extends IdParam {
+    @ApiProperty({ description: '被评论 ID' })
     id: number;
 }
 
@@ -20,9 +26,21 @@ export class CommentController {
         return this.commentService.createContentComment(param.id, data);
     }
 
+    @ApiOperation({ summary: '回复评论' })
+    @Post('comment/:id')
+    replyComment(@Param() param: replyCommentIdParam, @Body() body: CreateCommentDto) {
+        return this.commentService.createLinkComment(param.id, body);
+    }
+
     @ApiOperation({ summary: '评论列表' })
     @Get('list')
     listComment() {
         return this.commentService.listComment();
+    }
+
+    @ApiOperation({ summary: '评论分页' })
+    @Get('page')
+    queryComment(@Query() query: QueryCommentDto) {
+        return this.commentService.queryComment(query);
     }
 }
