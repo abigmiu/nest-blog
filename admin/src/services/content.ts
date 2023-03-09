@@ -1,5 +1,5 @@
 import { IArticleDetailResponse, IArticleResponseItem } from "../types/content";
-import { request } from "../utils/request"
+import { request, withCancelToken } from "../utils/request"
 
 class ContentService {
     private prefix = 'content'
@@ -21,10 +21,8 @@ class ContentService {
     }
 
     /** 文章分页 */
-    getArticlePage(query?: Record<string, any>, id?: number) {
-        return request<IArticleResponseItem[]>(`${this.prefix}/page`, {
-            params: query,
-        })
+    getArticlePage() {
+        return withCancelToken<IArticleResponseItem[]>(`${this.prefix}/page`)
     }
 
     /** 获取文章详情 */

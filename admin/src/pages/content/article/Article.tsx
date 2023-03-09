@@ -55,9 +55,9 @@ export const ArticlePage: React.FC = () => {
         page: 1,
         size: 10,
     }
-    const [fetchListData] = withCancelToken(contentService.getArticlePage.bind(contentService))
+    const [fetchListData] = contentService.getArticlePage();
     const fetchData = async () => {
-        const res = await fetchListData(query);
+        const res = await fetchListData({ params: query });
         setListData(res!);
     }
 

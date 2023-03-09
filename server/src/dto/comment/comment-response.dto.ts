@@ -4,16 +4,15 @@ import { CommentEntity } from 'src/entities/comment/comment.entity';
 export class CommentItemResponse {
     @Expose()
     @Transform(({ obj }: { obj: CommentEntity }) => {
-        console.log(obj);
-        const content = obj.content;
-        return content ? content.id : null;
+        const res = obj.content ? obj.content.id : null;
+        return res;
     })
     contentId: number;
 
     @Expose()
-    @Transform((data: { obj: CommentEntity }) => {
-        const parent = data.obj.parent;
-        return parent ? parent.id : null;
+    @Transform(({ obj }: { obj: CommentEntity }) => {
+        const res = obj.parent ? obj.parent.id : null;
+        return res;
     })
     parentId: number;
 }
